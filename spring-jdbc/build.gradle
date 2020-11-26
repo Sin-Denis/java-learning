@@ -1,0 +1,37 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.0'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'net.ltgt.apt' version '0.21'
+}
+
+apply plugin: 'net.ltgt.apt-idea'
+
+group = 'ru.sin'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	mapstructVersion = "1.4.1.Final"
+	lombokVersion = "1.18.16"
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-jdbc"
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	runtime "com.h2database:h2"
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+test {
+	useJUnitPlatform()
+}
